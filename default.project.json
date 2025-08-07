@@ -1,0 +1,10 @@
+{
+  "name": "PNGuin",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+      "$path": "src"
+		}
+  }
+}
