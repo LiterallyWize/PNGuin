@@ -51,4 +51,4 @@ local pixelData = pngInfo:DecodeRGBA()
 
 #
 
-###### This project was not built using [Rojo](https://github.com/rojo-rbx/rojo), I have never used [Rojo](https://github.com/rojo-rbx/rojo), and I do not understand [Rojo](https://github.com/rojo-rbx/rojo). <br> However, I went out of my way to structure this repository for [Rojo](https://github.com/rojo-rbx/rojo) users. If you notice a compatibility issue with this project and [Rojo](https://github.com/rojo-rbx/rojo), please open an issue.
+###### This project was not built using [Rojo](https://github.com/rojo-rbx/rojo), I have never used [Rojo](https://github.com/rojo-rbx/rojo), and I do not understand [Rojo](https://github.com/rojo-rbx/rojo). <br> However, I went out of my way to structure this repository for [Rojo](https://github.com/rojo-rbx/rojo) users. If you notice any compatibility issues, please open an issue.
