@@ -1,4 +1,4 @@
-<p align="center"> <img width="660" height="115" alt="PNGuin" src="https://github.com/user-attachments/assets/abfd8903-b8b0-490d-b29b-933d272b8ef6"/> </p>
+<p align="center"> <a href="#"><img width="660" height="115" alt="PNGuin" src="https://github.com/user-attachments/assets/abfd8903-b8b0-490d-b29b-933d272b8ef6"/></a> </p>
 
 ## <p align="center"> *A reasonably fast PNG library, written for Roblox.* </p>
 
