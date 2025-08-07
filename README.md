@@ -1,13 +1,18 @@
 <p align="center"> <img width="660" height="115" alt="PNGuin" src="https://github.com/user-attachments/assets/abfd8903-b8b0-490d-b29b-933d272b8ef6"/> </p>
 
-## <p align="center"> *A reasonably fast and lightweight PNG library, written for Roblox.* </p>
+## <p align="center"> *A reasonably fast PNG library, written for Roblox.* </p>
 
-This is a Luau implementation of the PNG file format, built for speed and minimal memory usage.
-<br> *Please note that this project was made in Roblox, and will not run in standalone Luau by itself.*
+This is a lightweight Luau implementation of the PNG file format, built for performance and memory efficiency.
+<br> *Please note that this library was made in Roblox, and will not run in a standalone Luau runtime by itself.*
+
+.RBXM binaries can be found in [Releases](https://github.com/LiterallyWize/PNGuin/releases).
+<br> The library can also be synced into Roblox Studio using [Rojo](https://github.com/rojo-rbx/rojo).
+
+#
 
 ### What this library does:
 
-<sup><sub><sub>🟢</sup></sub></sub>  Extracting all critical PNG chunks; `IHDR`, `PLTE` and `IDAT`
+<sup><sub><sub>🟢</sup></sub></sub>  Extracting all critical PNG chunks: `IHDR`, `PLTE` and `IDAT`
 
 <sup><sub><sub>🟢</sup></sub></sub>  Decoding RGBA pixel data from PNGs of any bit depth and color type
 
@@ -29,7 +34,19 @@ This is a Luau implementation of the PNG file format, built for speed and minima
 
 ### Usage Example:
 ```luau
--- wait where's the example
+local PNGuin = require(ReplicatedStorage.PNGuin)
+
+-- A buffer or string containing your PNG file data
+-- For example, this can be obtained from StudioService:PromptImportFile()
+local image
+
+-- Extract PNG metadata into PNGInfo (width, height, bitDepth, etc.)
+local pngInfo = PNGuin.Extract(image)
+print(pngInfo.width, pngInfo.height)
+
+-- Decode PNGInfo into a buffer containing 32-bpp RGBA pixel data
+-- This buffer can be written directly into an EditableImage to display the PNG
+local pixelData = pngInfo:DecodeRGBA()
 ```
 
 #
