@@ -2,11 +2,12 @@
 
 ## <p align="center"> *A reasonably fast PNG library, written for Roblox.* </p>
 
-This is a lightweight Luau implementation of the PNG file format, built for performance and memory efficiency.
-<br> *Please note that this library was made in Roblox, and will not run in a standalone Luau runtime by itself.*
+Lightweight and strictly typed Luau implementation of the PNG image format, built for speed and memory efficiency.
 
 .RBXM binaries can be found in [Releases](https://github.com/LiterallyWize/PNGuin/releases).
 <br> The library can also be synced into Roblox Studio using [Rojo](https://github.com/rojo-rbx/rojo).
+
+###### *Please note that this library was made in Roblox, and will not run in a standalone Luau runtime by itself.*
 
 #
 
