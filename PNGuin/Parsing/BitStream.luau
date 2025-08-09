@@ -21,12 +21,15 @@ local readMap = {
 
 @native
 local function Bits(self: BitStream, width: number): number
-	if width == 0 then return 0 end
-
+	local pos = self.pos
 	local offset = self.offset
+
+	local dist = (self.len - pos) * 8 - offset
+	width = if width > dist then dist else width
 	local shift = offset + width
 
-	local num = bit32.extract(buffer.readu32(self.data, self.pos), offset, width)
+	-- previously: bit32.extract(buffer.readu32(self.data, self.pos), offset, width)
+	local num = buffer.readbits(self.data, pos * 8 + offset, width)
 	self.pos += shift // 8
 	self.offset = shift % 8
 	return num
@@ -34,8 +37,6 @@ end
 
 @native
 local function UInt(self: BitStream, width: number): number
-	if width == 0 then return 0 end
-
 	local num = readMap[width](self.data, self.pos)
 	self.pos += width
 	return num
@@ -68,7 +69,7 @@ function BitStream.new(data: buffer): BitStream
 		Bits = Bits,
 		UInt = UInt,
 		String = String,
-		Align = Align
+		Align = Align,
 	}
 end
 
