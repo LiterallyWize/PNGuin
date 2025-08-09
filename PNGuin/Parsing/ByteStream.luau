@@ -21,11 +21,9 @@ local function UInt(self: ByteStream, width: number, big: boolean?): number
 	local num = readMap[width](self.data, self.pos)
 	self.pos += width
 
-	if big and width > 1 then
-		return bit32.byteswap(bit32.lshift(num, (4 - width) * 8))
-	end
-
-	return num
+	return if big
+		then bit32.byteswap(bit32.lshift(num, (4 - width) * 8))
+		else num
 end
 
 @native
