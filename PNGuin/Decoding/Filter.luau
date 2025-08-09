@@ -12,42 +12,64 @@ local converters = {
 		local dataLen = buffer.len(data)
 
 		local tRNS = info.tRNS
+		local bitDepth = info.bitDepth
 		local hasAlpha = info.hasAlpha
 		local channels = info.channels
-
-		local output = buffer.create(info.width * info.height * 4)
-		local outputPos = 0
-
-		local byteDepth = info.bitDepth // 8
-		local read: (b: buffer, offset: number) -> number =
-			if byteDepth == 2 then buffer.readu16 else buffer.readu8
 
 		local tr, tg, tb = 0, 0, 0
 		if tRNS then
 			tr, tg, tb =
-				buffer.readu16(tRNS, 0),
-				buffer.readu16(tRNS, 2),
-				buffer.readu16(tRNS, 4)
+				bit32.byteswap(buffer.readu16(tRNS, 0)),
+				bit32.byteswap(buffer.readu16(tRNS, 2)),
+				bit32.byteswap(buffer.readu16(tRNS, 4))
 		end
 
-		local pos = 0
-		while pos < dataLen do
-			local r, g, b, a =
-				read(data, pos),
-				read(data, pos + 1),
-				read(data, pos + 2),
-				if hasAlpha then read(data, pos + 3) else 255
+		local output = buffer.create(info.width * info.height * 4)
+		local outputPos = 0
 
-			if tRNS and r == tr and g == tg and b == tb then
-				a = 0
+		if bitDepth == 16 then
+			channels *= 2
+
+			local pos = 0
+			while pos < dataLen do
+				local r, g, b, a =
+					bit32.byteswap(buffer.readu16(data, pos) * 2^16),
+					bit32.byteswap(buffer.readu16(data, pos + 2) * 2^16),
+					bit32.byteswap(buffer.readu16(data, pos + 4) * 2^16),
+					if hasAlpha then bit32.byteswap(buffer.readu16(data, pos + 6) * 2^16) else 0xFFFF
+
+				if tRNS and r == tr and g == tg and b == tb then
+					a = 0
+				end
+
+				pos += channels
+				r, g, b, a = r // 2^8, g // 2^8, b // 2^8, a // 2^8
+
+				buffer.writeu32(output, outputPos,
+					(r) + (g * 2^8) + (b * 2^16) + (a * 2^24)
+				)
+				outputPos += 4
 			end
+		else
+			local pos = 0
+			while pos < dataLen do
+				local r, g, b, a =
+					buffer.readu8(data, pos),
+					buffer.readu8(data, pos + 1),
+					buffer.readu8(data, pos + 2),
+					if hasAlpha then buffer.readu8(data, pos + 3) else 0xFF
 
-			pos += channels
+				if tRNS and r == tr and g == tg and b == tb then
+					a = 0
+				end
 
-			buffer.writeu32(output, outputPos,
-				(r) + (g * 2^8) + (b * 2^16) + (a * 2^24)
-			)
-			outputPos += 4
+				pos += channels
+
+				buffer.writeu32(output, outputPos,
+					(r) + (g * 2^8) + (b * 2^16) + (a * 2^24)
+				)
+				outputPos += 4
+			end
 		end
 
 		return output
@@ -57,42 +79,70 @@ local converters = {
 		local dataLen = buffer.len(data)
 
 		local tRNS = info.tRNS
-		local tRNSLen = if tRNS then buffer.len(tRNS) else 0
 		local bitDepth = info.bitDepth
 		local hasAlpha = info.hasAlpha
 		local channels = info.channels
 
+		local tv = if tRNS then bit32.byteswap(buffer.readu16(tRNS, 0)) else 0
+
 		local output = buffer.create(info.width * info.height * 4)
 		local outputPos = 0
 
-		local byteDepth = bitDepth // 8
-		local read: (b: buffer, offset: number) -> number =
-			if byteDepth == 2 then buffer.readu16 else buffer.readu8
+		if bitDepth == 16 then
+			channels *= 2
 
-		local tv = if tRNS then buffer.readu16(tRNS, 0) else 0
-
-		local pos = 0
-		while pos < dataLen do
-			if bitDepth >= 8 then
-				local v = read(data, pos)
-				local a = if hasAlpha then read(data, pos + 1) else 255
-				pos += channels
+			local pos = 0
+			while pos < dataLen do
+				local v, a =
+					bit32.byteswap(buffer.readu16(data, pos) * 2^16),
+					if hasAlpha then bit32.byteswap(buffer.readu16(data, pos + 2) * 2^16) else 0xFFFF
 
 				if tRNS and v == tv then
 					a = 0
 				end
 
+				pos += channels
+				v, a = v // 2^8, a // 2^8
+
 				buffer.writeu32(output, outputPos,
 					(v) + (v * 2^8) + (v * 2^16) + (a * 2^24)
 				)
 				outputPos += 4
-			else
+			end
+		elseif bitDepth == 8 then
+			local pos = 0
+			while pos < dataLen do
+				local v, a =
+					buffer.readu8(data, pos),
+					if hasAlpha then buffer.readu8(data, pos + 1) else 0xFF
+
+				if tRNS and v == tv then
+					a = 0
+				end
+
+				pos += channels
+
+				buffer.writeu32(output, outputPos,
+					(v) + (v * 2^8) + (v * 2^16) + (a * 2^24)
+				)
+				outputPos += 4
+			end
+		else
+			local depthPos = 2^bitDepth
+			local subShift = 2^8 // depthPos
+			local subScale = (2^8 - 1) / (depthPos - 1)
+			
+			local pos = 0
+			while pos < dataLen do
 				local byte = buffer.readu8(data, pos)
 				pos += 1
 
-				for i = 1, 8 // bitDepth do
-					local v = (byte // 2^i) % 2^bitDepth
-					local a = 255
+				for _ = 1, 8 // bitDepth do
+					-- This calculation is Pissing me off...
+					-- I'm the original        Starwalker
+					local v = (byte // subShift % depthPos * subScale + 0.5) // 1
+					byte *= depthPos
+					local a = 0xFF
 
 					if tRNS and v == tv then
 						a = 0
@@ -120,9 +170,9 @@ local converters = {
 		local output = buffer.create(info.width * info.height * 4)
 		local outputPos = 0
 
-		local pos = 0
-		while pos < dataLen do
-			if bitDepth == 8 then
+		if bitDepth == 8 then
+			local pos = 0
+			while pos < dataLen do
 				local entry = buffer.readu8(data, pos)
 				pos += 1
 
@@ -131,25 +181,32 @@ local converters = {
 					buffer.readu8(PLTE, index),
 					buffer.readu8(PLTE, index + 1),
 					buffer.readu8(PLTE, index + 2),
-					if tRNS and entry < tRNSLen then buffer.readu8(tRNS, entry) else 255
+					if tRNS and entry < tRNSLen then buffer.readu8(tRNS, entry) else 0xFF
 
 				buffer.writeu32(output, outputPos,
 					(r) + (g * 2^8) + (b * 2^16) + (a * 2^24)
 				)
 				outputPos += 4
-			else
+			end
+		else
+			local depthPos = 2^bitDepth
+			local subShift = 2^8 // depthPos
+
+			local pos = 0
+			while pos < dataLen do
 				local byte = buffer.readu8(data, pos)
 				pos += 1
 
-				for i = 0, 7, bitDepth do
-					local entry = (byte // 2^i) % 2^bitDepth
+				for _ = 1, 8 // bitDepth do
+					local entry = byte // subShift % depthPos
+					byte *= depthPos
 
 					local index = entry * 3
 					local r, g, b, a =
 						buffer.readu8(PLTE, index),
 						buffer.readu8(PLTE, index + 1),
 						buffer.readu8(PLTE, index + 2),
-						if tRNS and entry < tRNSLen then buffer.readu8(tRNS, entry) else 255
+						if tRNS and entry < tRNSLen then buffer.readu8(tRNS, entry) else 0xFF
 
 					buffer.writeu32(output, outputPos,
 						(r) + (g * 2^8) + (b * 2^16) + (a * 2^24)
