@@ -30,7 +30,7 @@ end
 -- Extracts metadata and IDAT chunks from PNG data.
 -- Returns PNGInfo.
 @native
-function PNGuin.Extract(data: buffer | string): PNGInfo
+function PNGuin.Extract(input: buffer | string): PNGInfo
 	local info: PNGInfo = {
 		IDAT = buffer.create(0),
 		PLTE = buffer.create(0),
@@ -47,9 +47,9 @@ function PNGuin.Extract(data: buffer | string): PNGInfo
 		DecodeRGBA = DecodeRGBA
 	}
 
-	local data: buffer = if typeof(data) == "string"
-		then buffer.fromstring(data)
-		else data
+	local data = if typeof(input) == "string"
+		then buffer.fromstring(input)
+		else input
 
 	local stream = ByteStream.new(data)
 	local chunks = ChunkStream.new(info, stream)
