@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 export type ByteStream = {
@@ -16,7 +17,7 @@ local readMap = {
 	[4] = buffer.readu32
 }
 
-@native
+
 local function UInt(self: ByteStream, width: number, big: boolean?): number
 	local num = readMap[width](self.data, self.pos)
 	self.pos += width
@@ -26,7 +27,7 @@ local function UInt(self: ByteStream, width: number, big: boolean?): number
 		else num
 end
 
-@native
+
 local function String(self: ByteStream, length: number): string
 	local str = buffer.readstring(self.data, self.pos, length)
 	self.pos += length

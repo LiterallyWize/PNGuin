@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local Types = require("../Types")
@@ -24,7 +25,7 @@ local bitDepthMap = {
 }
 
 local chunks = {
-	IHDR = @native function(self: ChunkStream, chunkLen: number): ()
+	IHDR = function(self: ChunkStream, chunkLen: number): ()
 		if chunkLen ~= 13 then 
 			error(string.format(
 				"Invalid IHDR chunk length: Expected 13 bytes, got %d",
@@ -57,8 +58,8 @@ local chunks = {
 		local hasAlpha = colorSpace > 3
 
 		local channels = 1
-		if colorType == "Truecolor" then channels += 2 end
-		if hasAlpha then channels += 1 end
+			+ (colorType == "Truecolor" and 2 or 0)
+			+ (hasAlpha and 1 or 0)
 
 		local compMethod = stream:UInt(1)
 		if compMethod > 0 then
@@ -90,7 +91,7 @@ local chunks = {
 		info.channels = channels
 	end,
 
-	PLTE = @native function(self: ChunkStream, chunkLen: number): ()
+	PLTE = function(self: ChunkStream, chunkLen: number): ()
 		if chunkLen % 3 ~= 0 then 
 			error(string.format(
 				"Invalid PLTE chunk length: %d is not divisible by 3",
@@ -104,14 +105,14 @@ local chunks = {
 		info.PLTE = buffer.fromstring(stream:String(chunkLen))
 	end,
 
-	tRNS = @native function(self: ChunkStream, chunkLen: number): ()
+	tRNS = function(self: ChunkStream, chunkLen: number): ()
 		local info = self.info
 		local stream = self.stream
 
 		info.tRNS = buffer.fromstring(stream:String(chunkLen))
 	end,
 
-	IDAT = @native function(self: ChunkStream, chunkLen: number): ()
+	IDAT = function(self: ChunkStream, chunkLen: number): ()
 		local info = self.info
 		local stream = self.stream
 
@@ -132,12 +133,14 @@ local chunks = {
 	end,
 }
 
-@native
+
 local function Read(self: ChunkStream, chunkType: string, chunkLen: number): ()
 	local func = chunks[chunkType]
 	if not func then
 		self.stream.pos += chunkLen
-	else func(self, chunkLen) end
+	else
+		func(self, chunkLen)
+	end
 end
 
 local ChunkStream = {}

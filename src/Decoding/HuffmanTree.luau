@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local BitStream = require("../Parsing/BitStream")
@@ -15,7 +16,6 @@ export type HuffmanTree = {
 	Read: (self: HuffmanTree, stream: BitStream) -> number
 }
 
-@native
 local function Read(self: HuffmanTree, stream: BitStream): number
 	local cur = self.root
 
@@ -45,12 +45,11 @@ end
 
 local HuffmanTree = {}
 
-@native
 function HuffmanTree.new(info: {number}): HuffmanTree
 	local maxLen = 0
 	local lenCount: {number} = {}
 
-	for i, len in info do
+	for _, len in info do
 		if len > 0 then
 			lenCount[len] = (lenCount[len] or 0) + 1
 			if len > maxLen then maxLen = len end
@@ -91,7 +90,6 @@ function HuffmanTree.new(info: {number}): HuffmanTree
 	}
 end
 
-@native
 function HuffmanTree.newRepeat(info: {number}): HuffmanTree
 	local newInfo: {number} = {}
 

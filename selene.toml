@@ -1,0 +1,4 @@
+std = "luau+buffers"
+
+[lints]
+multiple_statements = "allow"

@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local HuffmanTree = require("../Decoding/HuffmanTree")
@@ -28,7 +29,6 @@ local distExtra = {
 }
 local clenOrder = {16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15}
 
-@native
 local function buildDynamicTrees(stream: BitStream): (HuffmanTree, HuffmanTree)
 	local hlit = stream:Bits(5) + 257
 	local hdist = stream:Bits(5) + 1
@@ -79,7 +79,6 @@ local function buildDynamicTrees(stream: BitStream): (HuffmanTree, HuffmanTree)
 	return litTree, distTree
 end
 
-@native
 local function parseCompressed(self: Parser, litTree: HuffmanTree, distTree: HuffmanTree): ()
 	local windowSize = self.windowSize
 	local stream = self.stream
@@ -110,7 +109,7 @@ local function parseCompressed(self: Parser, litTree: HuffmanTree, distTree: Huf
 
 			if chunk >= len then continue end
 
-			for i = chunk + 1, len do
+			for _ = chunk + 1, len do
 				pos = (self.windowPos - dist) % windowSize
 				local val = self:ReadWindow(pos)
 
@@ -121,7 +120,6 @@ local function parseCompressed(self: Parser, litTree: HuffmanTree, distTree: Huf
 	end
 end
 
-@native
 local function parseBlocks(self: Parser): buffer
 	local litFixed = HuffmanTree.newRepeat({0, 8, 144, 9, 256, 7, 280, 8, 288})
 	local distFixed = HuffmanTree.newRepeat({0, 5, 32})
@@ -163,7 +161,6 @@ end
 
 local Zlib = {}
 
-@native
 function Zlib.Decompress(data: buffer): buffer
 	local stream = BitStream.new(data)
 

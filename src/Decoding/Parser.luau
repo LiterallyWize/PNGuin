@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local BitStream = require("../Parsing/BitStream")
@@ -26,7 +27,6 @@ export type Parser = {
 	Finalize: (self: Parser) -> buffer
 }
 
-@native
 local function ToOutput(self: Parser, val: number): ()
 	local output = self._output
 	local outputPos = self._outputPos
@@ -35,8 +35,7 @@ local function ToOutput(self: Parser, val: number): ()
 	buffer.writeu8(output, outputPos, val)
 
 	if outputPos + 1 == windowSize then
-		local outputChunks = self._outputChunks
-		table.insert(outputChunks, output)
+		table.insert(self._outputChunks, output)
 
 		local outputNew = buffer.create(windowSize)
 		self._output = outputNew
@@ -46,7 +45,6 @@ local function ToOutput(self: Parser, val: number): ()
 	end
 end
 
-@native
 local function ToOutputBulk(self: Parser, val: string): ()
 	local output = self._output
 	local outputPos = self._outputPos
@@ -57,9 +55,7 @@ local function ToOutputBulk(self: Parser, val: string): ()
 	if outputPos + len >= windowSize then
 		local split = windowSize - outputPos
 		buffer.writestring(output, outputPos, val, split)
-
-		local outputChunks = self._outputChunks
-		table.insert(outputChunks, output)
+		table.insert(self._outputChunks, output)
 
 		local outputNew = buffer.create(windowSize)
 		self._output = outputNew
@@ -72,13 +68,13 @@ local function ToOutputBulk(self: Parser, val: string): ()
 	end
 end
 
-@native
 local function ToWindow(self: Parser, val: number): ()
 	local window = self.window
 	local windowPos = self.windowPos
 	local windowSize = self.windowSize
 
 	buffer.writeu8(window, windowPos, val)
+
 	if windowPos + 1 == windowSize then
 		self.windowPos = 0
 	else
@@ -86,7 +82,6 @@ local function ToWindow(self: Parser, val: number): ()
 	end
 end
 
-@native
 local function ToWindowBulk(self: Parser, val: string): ()
 	local window = self.window
 	local windowPos = self.windowPos
@@ -106,40 +101,35 @@ local function ToWindowBulk(self: Parser, val: string): ()
 	end
 end
 
-@native
 local function ReadWindow(self: Parser, pos: number): number
 	return buffer.readu8(self.window, pos)
 end
 
-@native
 local function ReadWindowBulk(self: Parser, pos: number, len: number): string
 	local window = self.window
 	local windowSize = self.windowSize
 
 	if pos + len > windowSize then
 		local split = windowSize - pos
-
-		return buffer.readstring(window, pos, split)
-			.. buffer.readstring(window, 0, len - split)
+		return buffer.readstring(window, pos, split) .. buffer.readstring(window, 0, len - split)
 	else
 		return buffer.readstring(self.window, pos, len)
 	end
 end
 
-@native
 local function Finalize(self: Parser): buffer
-	local output = self._output
 	local outputPos = self._outputPos
 	local outputChunks = self._outputChunks
 	local windowSize = self.windowSize
 
 	local result = buffer.create(#outputChunks * windowSize + outputPos)
+
 	for i, chunk in outputChunks do
 		buffer.copy(result, (i - 1) * windowSize, chunk, 0, windowSize)
 	end
 
 	if outputPos > 0 then
-		buffer.copy(result, #outputChunks * windowSize, output, 0, outputPos)
+		buffer.copy(result, #outputChunks * windowSize, self._output, 0, outputPos)
 	end
 
 	return result

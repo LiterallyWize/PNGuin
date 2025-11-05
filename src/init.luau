@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local Types = require("@self/Types")
@@ -11,21 +12,40 @@ type PNGInfo = Types.PNGInfo
 
 local PNGuin = {}
 
--- Decodes IDAT chunks from PNGInfo.
--- Returns a buffer of RGBA color data, and time spent decoding.
-@native
+--[=[
+	Decodes IDAT chunks into (RGBA) pixel data
+
+	@within PNGInfo
+
+	@return buffer -- Pixel data
+	@return number -- Time taken to decode in seconds
+]=]
 local function DecodeRGBA(self: PNGInfo): (buffer, number)
 	local clock = os.clock()
 
 	local filtered = Zlib.Decompress(self.IDAT)
-	local data = Filter.Unfilter(self, filtered)
+	local pixelData = Filter.Unfilter(self, filtered)
 
-	return data, os.clock() - clock
+	return pixelData, os.clock() - clock
 end
 
--- Extracts metadata and IDAT chunks from PNG data.
--- Returns PNGInfo.
-@native
+--[=[
+	Parses PNG data into `PNGInfo`
+
+	### Example Usage:
+	```lua
+	local png -- Your PNG binary data
+
+	local pngInfo = PNGuin.Extract(png)
+	local pixelData, elapsed = pngInfo:DecodeRGBA()
+	```
+
+	@within PNGuin
+
+	@param input -- PNG binary data as a `buffer` or `string`
+
+	@return PNGInfo -- Extracted information
+]=]
 function PNGuin.Extract(input: buffer | string): PNGInfo
 	local info: PNGInfo = {
 		IDAT = buffer.create(0),
@@ -43,12 +63,11 @@ function PNGuin.Extract(input: buffer | string): PNGInfo
 		DecodeRGBA = DecodeRGBA
 	}
 
-	local data = if typeof(input) == "string"
-		then buffer.fromstring(input)
-		else input
+	local data = if typeof(input) == "buffer" then input
+		else buffer.fromstring(input)
 
 	local stream = ByteStream.new(data)
-	local chunks = ChunkStream.new(info, stream)
+	local chunkStream = ChunkStream.new(info, stream)
 
 	local signature = stream:String(8)
 	if signature ~= "\137PNG\r\n\26\n" then
@@ -64,7 +83,7 @@ function PNGuin.Extract(input: buffer | string): PNGInfo
 		local chunkType = stream:String(4)
 
 		if chunkType == "IEND" then break end
-		chunks:Read(chunkType, chunkLen)
+		chunkStream:Read(chunkType, chunkLen)
 		stream.pos += 4
 	end
 

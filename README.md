@@ -1,15 +1,12 @@
-<p align="center"> <a href="#"><img width="660" height="115" alt="PNGuin" src="https://github.com/user-attachments/assets/abfd8903-b8b0-490d-b29b-933d272b8ef6"/></a> </p>
+<div align="center">
+	<a href="#"><img height="112" alt="PNGuin" src="assets/PNGuin.png"/></a>
+</div>
 
-## <p align="center"> *A reasonably fast PNG library, written for Roblox.* </p>
+## <p align="center"> A relatively fast PNG library written in Luau </p>
 
-Lightweight and strictly typed Luau implementation of the PNG image format, built for speed and memory efficiency.
-
-.RBXM binaries can be found in [Releases](https://github.com/LiterallyWize/PNGuin/releases).
-<br> The library can also be synced into Roblox Studio using [Rojo](https://github.com/rojo-rbx/rojo).
-
-###### *Please note that this library was made in Roblox, and will not run in a standalone Luau runtime by itself.*
-
-#
+Lightweight, performant, and memory-efficient Luau implementation of the PNG image format.
+<br>
+\+ Compatible with [Lune](https://github.com/lune-org/lune)!
 
 ### What this library does:
 
@@ -23,33 +20,27 @@ Lightweight and strictly typed Luau implementation of the PNG image format, buil
 
 ### What this library does...n't:
 
-<sup><sub><sub>🔴</sup></sub></sub>  Encoding PNG data *(planned)*
+<sup><sub><sub>🔴</sup></sub></sub>  Encoding PNG data (planned)
  
-<sup><sub><sub>🔴</sup></sub></sub>  Parsing chunks besides the ones listed above *(planned)*
+<sup><sub><sub>🔴</sup></sub></sub>  Parsing chunks besides the ones listed above (planned)
  
-<sup><sub><sub>🔴</sup></sub></sub>  Decoding interlaced PNGs *(in progress)*
+<sup><sub><sub>🔴</sup></sub></sub>  Decoding interlaced PNGs (planned)
  
 <sup><sub><sub>🔴</sup></sub></sub>  Decoding PNGs larger than ~1GB, this is due to [Luau buffer limitations](https://luau.org/library#buffer-library)
 
-#
+## Get Started
+
+`.rbxm` binaries can be downloaded from [Releases](https://github.com/LiterallyWize/PNGuin/releases).
+
+Alternatively, this can be installed as a [Wally](https://github.com/UpliftGames/wally) package with `wally install literallywize/pnguin`
+
 
 ### Usage Example:
 ```luau
-local PNGuin = require(ReplicatedStorage.PNGuin)
+local PNGuin = require(path.to.PNGuin)
 
--- A buffer or string containing your PNG file data
--- For example, this can be obtained from StudioService:PromptImportFile()
-local image
+local png -- Your PNG binary data
 
--- Extract PNG metadata into PNGInfo (width, height, bitDepth, etc.)
-local pngInfo = PNGuin.Extract(image)
-print(pngInfo.width, pngInfo.height)
-
--- Decode PNGInfo into a buffer containing 32-bpp RGBA pixel data
--- This buffer can be written directly into an EditableImage to display the PNG
-local pixelData = pngInfo:DecodeRGBA()
+local pngInfo = PNGuin.Extract(png)
+local pixelData, elapsed = pngInfo:DecodeRGBA()
 ```
-
-#
-
-###### This project was not built using [Rojo](https://github.com/rojo-rbx/rojo), I have never used [Rojo](https://github.com/rojo-rbx/rojo), and I do not understand [Rojo](https://github.com/rojo-rbx/rojo). <br> However, I went out of my way to structure this repository for [Rojo](https://github.com/rojo-rbx/rojo) users. If you notice any compatibility issues, please open an issue.

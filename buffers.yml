@@ -1,0 +1,8 @@
+---
+globals:
+  buffer.readbits:
+    args:
+      - type: ...
+  buffer.writebits:
+    args:
+      - type: ...

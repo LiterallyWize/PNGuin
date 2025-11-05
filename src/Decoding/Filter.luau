@@ -1,4 +1,5 @@
 --!strict
+--!native
 --!optimize 2
 
 local Types = require("../Types")
@@ -6,7 +7,7 @@ local Types = require("../Types")
 type PNGInfo = Types.PNGInfo
 
 local converters = {
-	Truecolor = @native function(info: PNGInfo, data: buffer): buffer
+	Truecolor = function(info: PNGInfo, data: buffer): buffer
 		local dataLen = buffer.len(data)
 
 		local tRNS = info.tRNS
@@ -73,7 +74,7 @@ local converters = {
 		return output
 	end,
 
-	Grayscale = @native function(info: PNGInfo, data: buffer): buffer
+	Grayscale = function(info: PNGInfo, data: buffer): buffer
 		local dataLen = buffer.len(data)
 
 		local tRNS = info.tRNS
@@ -157,7 +158,7 @@ local converters = {
 		return output
 	end,
 
-	Indexed = @native function(info: PNGInfo, data: buffer): buffer
+	Indexed = function(info: PNGInfo, data: buffer): buffer
 		local dataLen = buffer.len(data)
 
 		local PLTE = info.PLTE
@@ -220,7 +221,7 @@ local converters = {
 
 local Filter = {}
 
-@native
+
 function Filter.Unfilter(info: PNGInfo, data: buffer): buffer
 	local width = info.width
 	local height = info.height
