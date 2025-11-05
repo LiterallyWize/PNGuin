@@ -1,9 +1,7 @@
 --!strict
 --!optimize 2
 
-local PNGuin = script.Parent.Parent
-
-local Types = require(PNGuin.Types)
+local Types = require("../Types")
 
 type PNGInfo = Types.PNGInfo
 

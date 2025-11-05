@@ -1,10 +1,7 @@
 --!strict
 --!optimize 2
 
-local PNGuin = script.Parent.Parent
-
-local Parsing = PNGuin.Parsing
-local BitStream = require(Parsing.BitStream)
+local BitStream = require("../Parsing/BitStream")
 
 type BitStream = BitStream.BitStream
 

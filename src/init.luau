@@ -1,15 +1,11 @@
 --!strict
 --!optimize 2
 
-local Types = require(script.Types)
-
-local Parsing = script.Parsing
-local ChunkStream = require(Parsing.ChunkStream)
-local ByteStream = require(Parsing.ByteStream)
-
-local Decoding = script.Decoding
-local Zlib = require(Decoding.Zlib)
-local Filter = require(Decoding.Filter)
+local Types = require("@self/Types")
+local ChunkStream = require("@self/Parsing/ChunkStream")
+local ByteStream = require("@self/Parsing/ByteStream")
+local Zlib = require("@self/Decoding/Zlib")
+local Filter = require("@self/Decoding/Filter")
 
 type PNGInfo = Types.PNGInfo
 

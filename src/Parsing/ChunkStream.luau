@@ -1,12 +1,8 @@
 --!strict
 --!optimize 2
 
-local PNGuin = script.Parent.Parent
-
-local Types = require(PNGuin.Types)
-
-local Parsing = PNGuin.Parsing
-local ByteStream = require(Parsing.ByteStream)
+local Types = require("../Types")
+local ByteStream = require("../Parsing/ByteStream")
 
 type PNGInfo = Types.PNGInfo
 type ColorType = Types.ColorType
