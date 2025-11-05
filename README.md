@@ -1,3 +1,8 @@
+### <p align="center"> You are currently viewing the `legacy` branch. </p>
+<p align="center"> This branch contains an archived version of the repository as it existed before November 5, 2025. The repository has since been reset.<br>Contents of this branch may be outdated, broken, or unstable. </p>
+
+---
+
 <p align="center"> <a href="#"><img width="660" height="115" alt="PNGuin" src="https://github.com/user-attachments/assets/abfd8903-b8b0-490d-b29b-933d272b8ef6"/></a> </p>
 
 ## <p align="center"> *A reasonably fast PNG library, written for Roblox.* </p>
