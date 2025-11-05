@@ -1,15 +1,12 @@
 {
-  "name": "PNGuin",
-
-  "tree": {
-    "$className": "DataModel",
-
-    "ReplicatedStorage": {
-      "$className": "ReplicatedStorage",
-
-      "PNGuin": {
-        "$path": "PNGuin"
-      }
-    }
-  }
+	"name": "PNGuin",
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"PNGuin": {
+				"$path": "PNGuin"
+			}
+		}
+	}
 }
