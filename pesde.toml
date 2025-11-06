@@ -1,5 +1,5 @@
 authors = ["LiterallyWize"]
-description = "A relatively fast PNG library for Luau"
+description = "A relatively fast, pure Luau PNG library"
 includes = [
     "pesde.toml",
     "LICENSE",
