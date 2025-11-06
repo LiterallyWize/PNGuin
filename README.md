@@ -43,7 +43,7 @@ Lightweight, performant, and memory-efficient Luau implementation of the PNG ima
 `.rbxm` binaries can be downloaded and imported directly from the [**Releases**](https://github.com/LiterallyWize/PNGuin/releases/latest) page.
 
 ### Using [pesde](https://github.com/pesde-pkg/pesde)
-PNGuin can be installed as a [**pesde**](https://github.com/pesde-pkg/pesde) package using the following commands:
+[PNGuin is available as a pesde package](https://pesde.dev/packages/literallywize/pnguin), and can be installed using the following commands:
 ```bash
 pesde add literallywize/pnguin
 pesde install
