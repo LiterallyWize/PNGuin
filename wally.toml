@@ -8,4 +8,4 @@ repository = "https://github.com/LiterallyWize/PNGuin"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 exclude = ["*"]
-include = ["src", "LICENSE"]
+include = ["wally.toml", "src", "default.project.json", "LICENSE"]
