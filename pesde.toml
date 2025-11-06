@@ -1,0 +1,19 @@
+authors = ["LiterallyWize"]
+description = "A relatively fast PNG library for Luau"
+includes = [
+    "pesde.toml",
+    "LICENSE",
+    "README.md",
+    "bin/PNGuin.luau",
+]
+license = "MIT"
+name = "literallywize/pnguin"
+repository = "https://github.com/LiterallyWize/PNGuin"
+version = "1.0.0"
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
+
+[target]
+bin = "bin/PNGuin.luau"
+environment = "luau"

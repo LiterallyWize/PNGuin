@@ -2,8 +2,8 @@
 --!native
 --!optimize 2
 
-local Types = require("../Types")
-local ByteStream = require("../Parsing/ByteStream")
+local Types = require("@PNGuin/Types")
+local ByteStream = require("@PNGuin/Parsing/ByteStream")
 
 type PNGInfo = Types.PNGInfo
 type ColorType = Types.ColorType

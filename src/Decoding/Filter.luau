@@ -2,7 +2,7 @@
 --!native
 --!optimize 2
 
-local Types = require("../Types")
+local Types = require("@PNGuin/Types")
 
 type PNGInfo = Types.PNGInfo
 

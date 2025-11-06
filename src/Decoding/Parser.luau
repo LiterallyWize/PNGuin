@@ -2,7 +2,7 @@
 --!native
 --!optimize 2
 
-local BitStream = require("../Parsing/BitStream")
+local BitStream = require("@PNGuin/Parsing/BitStream")
 
 type BitStream = BitStream.BitStream
 

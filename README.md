@@ -2,10 +2,20 @@
 	<a href="#"><img height="112" alt="PNGuin" src="assets/PNGuin.png"/></a>
 </div>
 
-## <p align="center"> A relatively fast PNG library for Luau </p>
+<h2 align="center">
+	<p>A relatively fast, pure Luau PNG library</p>
+	<div>
+		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
+			src="https://img.shields.io/github/v/release/LiterallyWize/PNGuin?style=flat&logo=roblox%20studio&logoColor=%23ffffff&labelColor=%20%235e81e0&color=%234556a8"/>
+		</a>
+		<a href="LICENSE"><img alt="GitHub License"
+			src="https://img.shields.io/github/license/LiterallyWize/PNGuin?style=flat&labelColor=%235e81e0"/>
+		</a>
+	</div>
+	<p></p>
+</h2>
 
-Lightweight, performant, and memory-efficient Luau implementation of the PNG image format.
-<br>
+Lightweight, performant, and memory-efficient Luau implementation of the PNG image format! <sub><a href="#"><img src="https://cdn.discordapp.com/emojis/1273196227814621224.webp?size=44" height="22" alt="loopThumbsUp" title="loopThumbsUp"/></a></sub>
 
 ### What this library does:
 
@@ -25,11 +35,21 @@ Lightweight, performant, and memory-efficient Luau implementation of the PNG ima
  
 <sup><sub><sub>🔴</sup></sub></sub>  Decoding interlaced PNGs (planned)
  
-<sup><sub><sub>🔴</sup></sub></sub>  Decoding PNGs larger than ~1GB, this is due to [Luau buffer limitations](https://luau.org/library#buffer-library)
+<sup><sub><sub>🔴</sup></sub></sub>  Decoding PNGs larger than ~1GB, this is due to [**Luau buffer limitations**](https://luau.org/library#buffer-library)
 
-## Get Started
+## Installation
 
-`.rbxm` binaries can be downloaded from [Releases](https://github.com/LiterallyWize/PNGuin/releases).
+### Using Roblox
+`.rbxm` binaries can be downloaded and imported directly from the [**Releases**](https://github.com/LiterallyWize/PNGuin/releases/latest) page.
+
+### Using [pesde](https://github.com/pesde-pkg/pesde)
+PNGuin can be installed as a [**pesde**](https://github.com/pesde-pkg/pesde) package using the following commands:
+```bash
+pesde add literallywize/pnguin
+pesde install
+```
+
+#
 
 ### Usage Example:
 ```luau
