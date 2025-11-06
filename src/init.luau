@@ -2,11 +2,11 @@
 --!native
 --!optimize 2
 
-local Types = require("@PNGuin/Types")
-local ChunkStream = require("@PNGuin/Parsing/ChunkStream")
-local ByteStream = require("@PNGuin/Parsing/ByteStream")
-local Zlib = require("@PNGuin/Decoding/Zlib")
-local Filter = require("@PNGuin/Decoding/Filter")
+local Types = require("@self/Types")
+local ChunkStream = require("@self/Parsing/ChunkStream")
+local ByteStream = require("@self/Parsing/ByteStream")
+local Zlib = require("@self/Decoding/Zlib")
+local Filter = require("@self/Decoding/Filter")
 
 type PNGInfo = Types.PNGInfo
 

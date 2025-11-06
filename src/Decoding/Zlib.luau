@@ -2,10 +2,10 @@
 --!native
 --!optimize 2
 
-local HuffmanTree = require("@PNGuin/Decoding/HuffmanTree")
-local Parser = require("@PNGuin/Decoding/Parser")
+local HuffmanTree = require("../Decoding/HuffmanTree")
+local Parser = require("../Decoding/Parser")
 
-local BitStream = require("@PNGuin/Parsing/BitStream")
+local BitStream = require("../Parsing/BitStream")
 
 type BitStream = BitStream.BitStream
 type HuffmanTree = HuffmanTree.HuffmanTree

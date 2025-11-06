@@ -2,10 +2,7 @@
 	"bundle": {
 		"modules_identifier": "__DARKLUA_BUNDLE_MODULES",
 		"require_mode": {
-			"name": "luau",
-			"sources": {
-				"PNGuin": "./src"
-			}
+			"name": "luau"
 		}
 	},
 	"rules": [

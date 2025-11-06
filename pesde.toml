@@ -9,11 +9,11 @@ includes = [
 license = "MIT"
 name = "literallywize/pnguin"
 repository = "https://github.com/LiterallyWize/PNGuin"
-version = "1.0.0"
+version = "1.0.1"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
 
 [target]
-lib = "bin/PNGuin.luau"
 environment = "luau"
+lib = "bin/PNGuin.luau"
