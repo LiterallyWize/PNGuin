@@ -33,6 +33,7 @@ end
 	```
 
 	@within PNGuin
+	@function Extract
 
 	@param input -- PNG binary data as a `buffer` or `string`
 
