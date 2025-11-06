@@ -12,14 +12,6 @@ type PNGInfo = Types.PNGInfo
 
 local PNGuin = {}
 
---[=[
-	Decodes IDAT chunks into (RGBA) pixel data
-
-	@within PNGInfo
-
-	@return buffer -- Pixel data
-	@return number -- Time taken to decode in seconds
-]=]
 local function DecodeRGBA(self: PNGInfo): (buffer, number)
 	local clock = os.clock()
 
@@ -41,6 +33,7 @@ end
 	```
 
 	@within PNGuin
+	@function Extract
 
 	@param input -- PNG binary data as a `buffer` or `string`
 

@@ -14,6 +14,14 @@ export type PNGInfo = {
 	hasAlpha: boolean,
 	channels: number,
 
+	--[=[
+		Decodes IDAT chunks into (RGBA) pixel data
+
+		@within PNGInfo
+
+		@return buffer -- Pixel data
+		@return number -- Time taken to decode in seconds
+	]=]
 	DecodeRGBA: (self: PNGInfo) -> (buffer, number)
 }
 
