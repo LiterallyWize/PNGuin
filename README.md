@@ -1,5 +1,5 @@
 <div align="center">
-	<a href="#"><img height="112" alt="PNGuin" src="https://github.com/LiterallyWize/PNGuin/blob/main/assets/PNGuin.png"/></a>
+	<a href="#"><img height="112" alt="PNGuin" src="https://raw.githubusercontent.com/LiterallyWize/PNGuin/refs/heads/main/assets/PNGuin.png"/></a>
 </div>
 
 <h2 align="center">
