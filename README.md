@@ -2,11 +2,10 @@
 	<a href="#"><img height="112" alt="PNGuin" src="assets/PNGuin.png"/></a>
 </div>
 
-## <p align="center"> A relatively fast PNG library written in Luau </p>
+## <p align="center"> A relatively fast PNG library for Luau </p>
 
 Lightweight, performant, and memory-efficient Luau implementation of the PNG image format.
 <br>
-\+ Compatible with [Lune](https://github.com/lune-org/lune)!
 
 ### What this library does:
 
