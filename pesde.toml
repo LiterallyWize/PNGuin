@@ -15,5 +15,5 @@ version = "1.0.0"
 default = "https://github.com/pesde-pkg/index"
 
 [target]
-bin = "bin/PNGuin.luau"
+lib = "bin/PNGuin.luau"
 environment = "luau"

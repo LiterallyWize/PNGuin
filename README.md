@@ -1,5 +1,5 @@
 <div align="center">
-	<a href="#"><img height="112" alt="PNGuin" src="assets/PNGuin.png"/></a>
+	<a href="#"><img height="112" alt="PNGuin" src="https://github.com/LiterallyWize/PNGuin/blob/main/assets/PNGuin.png"/></a>
 </div>
 
 <h2 align="center">
@@ -8,7 +8,7 @@
 		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
 			src="https://img.shields.io/github/v/release/LiterallyWize/PNGuin?style=flat&logo=roblox%20studio&logoColor=%23ffffff&labelColor=%20%235e81e0&color=%234556a8"/>
 		</a>
-		<a href="LICENSE"><img alt="GitHub License"
+		<a href="https://github.com/LiterallyWize/PNGuin/blob/main/LICENSE"><img alt="GitHub License"
 			src="https://img.shields.io/github/license/LiterallyWize/PNGuin?style=flat&labelColor=%235e81e0"/>
 		</a>
 	</div>
