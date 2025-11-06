@@ -31,7 +31,7 @@ Lightweight, performant, and memory-efficient Luau implementation of the PNG ima
 
 `.rbxm` binaries can be downloaded from [Releases](https://github.com/LiterallyWize/PNGuin/releases).
 
-Alternatively, this can be installed as a [Wally](https://github.com/UpliftGames/wally) package with `wally install literallywize/pnguin`
+Alternatively, this can be installed using [Wally](https://github.com/UpliftGames/wally) by adding `PNGuin = "literallywize/pnguin@1.0.0"` to your dependencies
 
 
 ### Usage Example:
