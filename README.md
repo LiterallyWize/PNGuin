@@ -8,7 +8,7 @@
 		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
 			src="https://img.shields.io/github/v/release/LiterallyWize/PNGuin?style=flat&logo=robloxstudio&logoColor=ffffff&labelColor=5e81e0&color=4556a8"/>
 		</a>
-		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
+		<a href="https://github.com/LiterallyWize/PNGuin/wiki"><img alt="GitHub Wiki"
 			src="https://img.shields.io/badge/wiki-wiki?style=flat&logo=gitbook&logoColor=ffffff&labelColor=5e81e0&color=4556a8"/>
 		</a>
 		<a href="https://github.com/LiterallyWize/PNGuin/blob/main/LICENSE"><img alt="GitHub License"
