@@ -6,16 +6,19 @@
 	<p>A relatively fast, pure Luau PNG library</p>
 	<div>
 		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
-			src="https://img.shields.io/github/v/release/LiterallyWize/PNGuin?style=flat&logo=roblox%20studio&logoColor=%23ffffff&labelColor=%20%235e81e0&color=%234556a8"/>
+			src="https://img.shields.io/github/v/release/LiterallyWize/PNGuin?style=flat&logo=robloxstudio&logoColor=ffffff&labelColor=5e81e0&color=4556a8"/>
+		</a>
+		<a href="https://github.com/LiterallyWize/PNGuin/releases/latest"><img alt="GitHub Release"
+			src="https://img.shields.io/badge/wiki-wiki?style=flat&logo=gitbook&logoColor=ffffff&labelColor=5e81e0&color=4556a8"/>
 		</a>
 		<a href="https://github.com/LiterallyWize/PNGuin/blob/main/LICENSE"><img alt="GitHub License"
-			src="https://img.shields.io/github/license/LiterallyWize/PNGuin?style=flat&labelColor=%235e81e0"/>
+			src="https://img.shields.io/github/license/LiterallyWize/PNGuin?style=flat&labelColor=5e81e0"/>
 		</a>
 	</div>
 	<p></p>
 </h2>
 
-Lightweight, performant, and memory-efficient Luau implementation of the PNG image format! <sub><a href="#"><img src="https://cdn.discordapp.com/emojis/1273196227814621224.webp?size=44" height="22" alt="loopThumbsUp" title="loopThumbsUp"/></a></sub>
+Lightweight, performant, and memory-efficient Luau implementation of the PNG image format!
 
 ### What this library does:
 
@@ -43,7 +46,7 @@ Lightweight, performant, and memory-efficient Luau implementation of the PNG ima
 `.rbxm` binaries can be downloaded and imported directly from the [**Releases**](https://github.com/LiterallyWize/PNGuin/releases/latest) page.
 
 ### Using [pesde](https://github.com/pesde-pkg/pesde)
-[PNGuin is available as a pesde package](https://pesde.dev/packages/literallywize/pnguin), and can be installed using the following commands:
+[**PNGuin is available as a pesde package**](https://pesde.dev/packages/literallywize/pnguin), and can be installed using the following commands:
 ```bash
 pesde add literallywize/pnguin
 pesde install
@@ -51,12 +54,4 @@ pesde install
 
 #
 
-### Usage Example:
-```luau
-local PNGuin = require(path.to.PNGuin)
-
-local png -- Your PNG binary data
-
-local pngInfo = PNGuin.Extract(png)
-local pixelData, elapsed = pngInfo:DecodeRGBA()
-```
+### Documentation can be found on the [wiki](https://github.com/LiterallyWize/PNGuin/wiki)! <sub><a href="#"><img src="https://cdn.discordapp.com/emojis/1273196227814621224.webp?size=44" height="28" alt="loopThumbsUp" title="loopThumbsUp"/></a></sub>
