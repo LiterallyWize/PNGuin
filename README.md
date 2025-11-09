@@ -54,4 +54,4 @@ pesde install
 
 #
 
-### Documentation can be found on the [wiki](https://github.com/LiterallyWize/PNGuin/wiki)! <sub><a href="#"><img src="https://cdn.discordapp.com/emojis/1273196227814621224.webp?size=44" height="28" alt="loopThumbsUp" title="loopThumbsUp"/></a></sub>
+### Documentation can be found on the [wiki](https://github.com/LiterallyWize/PNGuin/wiki) <sub><a href="#"><img src="https://cdn.discordapp.com/emojis/1273196227814621224.webp?size=44" height="28" alt="loopThumbsUp" title="loopThumbsUp"/></a></sub>
