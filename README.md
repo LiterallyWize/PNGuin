@@ -1,3 +1,11 @@
+> [!IMPORTANT]
+> ### PNGuin was archived on June 4, 2026.
+> This repository is no longer maintained. <br> For all future work, please use its successor: [**Picguin**](https://github.com/wizevaxel/picguin)
+
+---
+
+<br>
+
 <div align="center">
 	<a href="#"><img height="112" alt="PNGuin" src="https://raw.githubusercontent.com/LiterallyWize/PNGuin/refs/heads/main/assets/PNGuin.png"/></a>
 </div>
